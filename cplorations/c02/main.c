@@ -96,6 +96,15 @@ int vowels(char* txt) {
 	int vowel = 0;
 
 	/* REPLACE WITH YOUR CODE */
+	for (int i= 0; i < length(txt); i ++) {
+		char ch = txt[i];
+		if (ch == 'a' || ch == 'e' || ch == 'i'
+		|| ch == 'o' || ch == 'u' || ch == 'A'
+		|| ch == 'E' || ch == 'I' || ch == 'O'
+		|| ch == 'U') {
+			vowel += 1;
+		}
+	}
 
 	return vowel;
 }
@@ -118,8 +127,24 @@ int vowels(char* txt) {
 int quartile(char* name) {
 
 	/* REPLACE WITH YOUR CODE */
+	//char second_quartile[] = {"G"};
+	//char third_quartile[] = {"M"};
+	//char fourth_quartile[] = {"S"};
+	char test_string[2];
+	test_string[0] = name[0];
+	test_string[1] = '\0';
 	
-	return -1; // <==fix!
+	if (strcmp(test_string, "S") >= 0) {
+		return 4;
+	} 
+	if (strcmp(test_string, "M") >= 0) {
+		return 3;
+	} 
+	if (strcmp(test_string, "G") >= 0) {
+		return 2;
+	} 
+	return 1;
+	
 }
 
 

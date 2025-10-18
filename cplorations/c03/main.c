@@ -3,15 +3,15 @@
 #include <stdlib.h>
 #define MAX_LINE_LENGTH 200
 int main(int argc, const char *argv[]) {
-    printf("TEST\n");
+    //Checks for invalid argument quantities
     if (argc != 2) {
         printf("Usage: %s [filename]\n", argv[0]);
         exit(EXIT_FAILURE);
     }
-    printf("Program started\n");
 
     FILE *fin = fopen( argv[1], "r" );
     
+    //Checks if our file in has nothing
     if (fin == NULL) {
         perror("Unable to open file!");
         exit(EXIT_FAILURE);

@@ -127,9 +127,6 @@ int vowels(char* txt) {
 int quartile(char* name) {
 
 	/* REPLACE WITH YOUR CODE */
-	//char second_quartile[] = {"G"};
-	//char third_quartile[] = {"M"};
-	//char fourth_quartile[] = {"S"};
 	char test_string[2];
 	test_string[0] = name[0];
 	test_string[1] = '\0';

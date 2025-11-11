@@ -8,7 +8,6 @@
 // The algorithm is based on repetitive addition.
 
 //// Replace this comment with your code.
-
 @R2
 M=0
 @R1

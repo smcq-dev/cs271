@@ -33,4 +33,58 @@ CHIP CPU {
 
     PARTS:
 	//// Replace this comment with your code.
+
+    //Is it a c instruction?
+    Or(a= instruction[15], b= false, out= isCinstruction);
+
+    // select alu y input
+    Mux16(a= aout, b= inM, sel= instruction[12], out= aluY);
+
+    // alu
+    ALU(x= dout, y= aluY, zx= instruction[11], nx= instruction[10]
+    , zy= instruction[9], ny= instruction[8], f= instruction[7], 
+    no= instruction[6], out= aluOut, out=outM, zr= zr, ng= ng);
+
+    // a register
+    Mux16(a[0..14]= instruction[0..14], a[15]=false, b= aluOut, sel= isCinstruction, out= aIn);
+    Not(in= isCinstruction, out= isAinstruction);
+    And(a= isCinstruction, b= instruction[5], out= isCwriteA);
+    Or(a= isCwriteA, b= isAinstruction, out= loadA);
+    ARegister(in= aIn, load= loadA, out= aout, out[0..14]= addressM);
+
+    // d register
+    And(a=isCinstruction, b=instruction[4], out=loadD);
+    DRegister(in=aluOut, load=loadD, out=dout);
+
+
+    // writeM
+    And(a= isCinstruction, b= instruction[3], out= writeM);
+
+
+    // jump conditions
+    Not(in= ng, out= notng);
+    Not(in= zr, out= notzr);
+    And(a= notzr, b= notng, out= pos);
+
+
+    // check for conditions
+    And(a= instruction[0], b= pos, out= JGT);
+    And(a= instruction[1], b= zr, out= JEQ);
+    And(a= instruction[2], b= ng, out= JLT);
+
+
+    // combine all
+    Or(a= JGT, b= JEQ, out= temp);
+    Or(a= temp, b= JLT, out= jump);
+
+    
+    // jump only if c
+    And(a= isCinstruction, b= jump, out= pcload);
+
+
+    // pc
+    PC(in= aout, load= pcload, inc= true, reset= reset, out[0..14]= pc);
+
+
+   
 }

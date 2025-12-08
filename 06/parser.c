@@ -229,5 +229,24 @@ void parse_C_instruction(char *line, c_instruction *instr) {
 	
 }
 
+void assemble(const char * file_name, instruction* instructions, int num_instructions){
+	char hack_ending[] = ".hack";
+	char file_name_temp[256];
+	strcpy(file_name_temp, file_name);
+	strcat(file_name_temp, hack_ending);
+
+	FILE *fout = fopen(file_name_temp, "w");
+
+	if (fout == NULL) {
+
+	}
+
+	for(int i = 0; i < num_instructions; i++) {
+
+	}
+
+	fclose(fout);
+
+}
 
 

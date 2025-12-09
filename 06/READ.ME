@@ -1,0 +1,10 @@
+This project is a hack assembly language assembler and parser. 
+Here is what you need to know about the assembler functionality:
+
+main.c is the driver program. This file controls the output that you will get when you run the 
+program from the command line. Hence, you should use the main.exe file that is generated with you run the
+makefile. In order to run the program on a specific .asm file from the command line, you must run main.exe first,
+then enter the relevant asm file. Ex: main.exe asm\Add.asm (assuming Add.asm is in the subdirectory asm). 
+Main.c calls all relevant files that are required for the assembler and parser to work. The assembler will create a 
+.hack file for the respective asm file that you run from the command line. It will store itself in the same directory as it's asm file. 
+In the .hack file, there will be 16 bit binary instructions that represent the instructions written on the relevant line of the .asm file in machine code. 

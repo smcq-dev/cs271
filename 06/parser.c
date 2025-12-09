@@ -243,7 +243,7 @@ void assemble(const char * file_name, instruction* instructions, int num_instruc
 
 	int counter = 16;
 	for(int i = 0; i < num_instructions; i++) {
-
+		opcode op = 0;
 		if(instructions[i].itype == A_type) {
 
 			if (instructions[i].inst.a.is_addr == false) {
@@ -256,14 +256,17 @@ void assemble(const char * file_name, instruction* instructions, int num_instruc
 				free(label);
 				
 			}
+			op = instructions[i].inst.a.operand.address;
 
 		}
 		
 
 		else if(instructions[i].itype == C_type) {
-			opcode op = instruction_to_opcode(instructions[i].inst.c);
-			fprintf(fout, "%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c\n", OPCODE_TO_BINARY(op));
+			op = instruction_to_opcode(instructions[i].inst.c);
+			
 		}
+
+		fprintf(fout, "%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c\n", OPCODE_TO_BINARY(op));
 		
 
 	}

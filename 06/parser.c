@@ -238,7 +238,7 @@ void assemble(const char * file_name, instruction* instructions, int num_instruc
 	FILE *fout = fopen(file_name_temp, "w");
 
 	if (fout == NULL) {
-
+		exit_program(EXIT_CANNOT_OPEN_FILE, file_name_temp);
 	}
 
 	int counter = 16;
@@ -260,14 +260,27 @@ void assemble(const char * file_name, instruction* instructions, int num_instruc
 		}
 		
 
-		if(instructions[i].itype == C_type) {
-
+		else if(instructions[i].itype == C_type) {
+			opcode op = instruction_to_opcode(instructions[i].inst.c);
+			fprintf(fout, "%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c\n", OPCODE_TO_BINARY(op));
 		}
+		
 
 	}
 
 	fclose(fout);
 
 }
+
+opcode instruction_to_opcode(c_instruction instr) {
+	opcode op = 0;
+	op |= (7 << 13);
+	op |= (instr.a << 12);
+	op |= (instr.comp << 6);
+	op |= (instr.dest << 3);
+	op |= instr.jump;
+	return op;
+}
+
 
 

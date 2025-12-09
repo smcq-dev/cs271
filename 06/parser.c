@@ -266,8 +266,11 @@ void assemble(const char * file_name, instruction* instructions, int num_instruc
 			
 		}
 
-		fprintf(fout, "%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c\n", OPCODE_TO_BINARY(op));
+		fprintf(fout, "%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c", OPCODE_TO_BINARY(op));
 		
+		if (i<num_instructions - 1) {
+			fprintf(fout, "\n");
+		}
 
 	}
 

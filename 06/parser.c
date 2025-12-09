@@ -241,7 +241,28 @@ void assemble(const char * file_name, instruction* instructions, int num_instruc
 
 	}
 
+	int counter = 16;
 	for(int i = 0; i < num_instructions; i++) {
+
+		if(instructions[i].itype == A_type) {
+
+			if (instructions[i].inst.a.is_addr == false) {
+				char *label = instructions[i].inst.a.operand.label;
+				if (symtable_find(label) == NULL ) {
+					symtable_insert(label, counter);
+					counter ++;
+				}
+				instructions[i].inst.a.operand.address = symtable_find(label)->addr;
+				free(label);
+				
+			}
+
+		}
+		
+
+		if(instructions[i].itype == C_type) {
+
+		}
 
 	}
 
